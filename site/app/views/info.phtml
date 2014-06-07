@@ -11,10 +11,12 @@
 
     <div class="span2">
         <h2>Modifier mes informations personnelles</h2>
-        <form action="modif_info_profil">
-        	<label id="telephone">Telephone :</label><input type="text" id="telephone">
-        	<label id="email">Email :</label><input  type="email" id="email">
-        	<label id="adresse">Adresse : </label><textarea id="adresse"></textarea>
+        
+        <form action="?action=info" method="post">
+        	<label id="telephone">Telephone :</label><input type="text" name="telephone" id="telephone">
+        	<label id="email">Email :</label><input  type="email" name="nom" id="email">
+        	<label id="adresse">Adresse : </label><textarea name="adresse" id="adresse"></textarea>
+        	<INPUT TYPE="submit" VALUE="Valider">
         </form>
         
     </div>

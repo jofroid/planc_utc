@@ -18,7 +18,6 @@ Class Etudiant {
 	
 	
 	function inserer () {
-		
 	}
 	
 	public static function getEtudiants(){
