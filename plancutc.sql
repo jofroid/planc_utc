@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Juin 2014 à 23:01
+-- Généré le: Sam 07 Juin 2014 à 23:14
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -32,8 +32,9 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `login` varchar(8) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
-  `age` int(2) NOT NULL,
-  `sexe` char(1) NOT NULL,
+  `is_admin` tinyint(1) DEFAULT '0',
+  `is_adult` tinyint(1) DEFAULT '0',
+  `email` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,12 +42,12 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 -- Contenu de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`login`, `nom`, `prenom`, `age`, `sexe`) VALUES
-('brascore', 'Bras', 'Corentin', 20, 'H'),
-('gdietsch', 'Dietsch', 'Geoffroy', 21, 'H'),
-('herbinir', 'Herbin', 'Iris', 21, 'F'),
-('pleymari', 'Leymarie', 'Pierre-Gilles', 19, 'h'),
-('veroclar', 'Veron', 'Clarisse', 20, 'F');
+INSERT INTO `etudiant` (`login`, `nom`, `prenom`, `is_admin`, `is_adult`, `email`) VALUES
+('brascore', 'Bras', 'Corentin', 1, 0, NULL),
+('gdietsch', 'Dietsch', 'Geoffroy', 0, 0, NULL),
+('herbinir', 'Herbin', 'Iris', 0, 0, NULL),
+('pleymari', 'Leymarie', 'Pierre-Gilles', 1, 0, NULL),
+('veroclar', 'Veron', 'Clarisse', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -86,11 +87,12 @@ INSERT INTO `image` (`id`, `source`, `visible`, `legende`, `dateUpload`, `loginE
 CREATE TABLE IF NOT EXISTS `infos_profil` (
   `loginEtudiant` varchar(255) NOT NULL DEFAULT '',
   `tel` int(10) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
   `adresse` int(11) NOT NULL,
   `orientation` char(1) NOT NULL,
   `semestre` char(4) NOT NULL,
   `avatar` int(11) NOT NULL,
+  `age` int(2) NOT NULL,
+  `sexe` char(1) NOT NULL,
   PRIMARY KEY (`loginEtudiant`),
   UNIQUE KEY `loginEtudiant` (`loginEtudiant`),
   KEY `adresse` (`adresse`),
@@ -101,11 +103,11 @@ CREATE TABLE IF NOT EXISTS `infos_profil` (
 -- Contenu de la table `infos_profil`
 --
 
-INSERT INTO `infos_profil` (`loginEtudiant`, `tel`, `email`, `adresse`, `orientation`, `semestre`, `avatar`) VALUES
-('brascore', 659010101, 'brascore@etu.utc.fr', 1, 'F', 'GI02', 1),
-('gdietsch', NULL, 'gdietsch@etu.utc.fr', 2, 'F', 'GI02', 2),
-('herbinir', 659456255, 'herbinr@etu.utc.fr', 3, 'H', 'GI02', 6),
-('veroclar', 659235865, 'veroclar@etu.utc.fr', 4, 'B', 'TC04', 4);
+INSERT INTO `infos_profil` (`loginEtudiant`, `tel`, `adresse`, `orientation`, `semestre`, `avatar`, `age`, `sexe`) VALUES
+('brascore', 659010101, 1, 'F', 'GI02', 1, 21, 'H'),
+('gdietsch', NULL, 2, 'F', 'GI02', 2, 21, 'H'),
+('herbinir', 659456255, 3, 'H', 'GI02', 6, 21, 'H'),
+('veroclar', 659235865, 4, 'B', 'TC04', 4, 17, 'H');
 
 -- --------------------------------------------------------
 
@@ -244,9 +246,9 @@ ALTER TABLE `image`
 -- Contraintes pour la table `infos_profil`
 --
 ALTER TABLE `infos_profil`
-  ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`),
   ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`adresse`) REFERENCES `quartier` (`id`),
-  ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`);
+  ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`),
+  ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`);
 
 --
 -- Contraintes pour la table `permissions_adr`
