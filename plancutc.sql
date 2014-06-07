@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Juin 2014 à 22:04
+-- Généré le: Sam 07 Juin 2014 à 23:01
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -42,7 +42,11 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 --
 
 INSERT INTO `etudiant` (`login`, `nom`, `prenom`, `age`, `sexe`) VALUES
-('pleymari', 'Leymarie', 'Pierre-Gilles', 19, 'h');
+('brascore', 'Bras', 'Corentin', 20, 'H'),
+('gdietsch', 'Dietsch', 'Geoffroy', 21, 'H'),
+('herbinir', 'Herbin', 'Iris', 21, 'F'),
+('pleymari', 'Leymarie', 'Pierre-Gilles', 19, 'h'),
+('veroclar', 'Veron', 'Clarisse', 20, 'F');
 
 -- --------------------------------------------------------
 
@@ -59,14 +63,19 @@ CREATE TABLE IF NOT EXISTS `image` (
   `loginEtudiant` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `loginEtudiant` (`loginEtudiant`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `image`
 --
 
 INSERT INTO `image` (`id`, `source`, `visible`, `legende`, `dateUpload`, `loginEtudiant`) VALUES
-(1, 'http://lfskdlfmsdkmf.fr', 1, 'sdfdsfsdf', '2014-06-04', 'pleymari');
+(1, 'http://lfskdlfmsdkmf.fr', 1, 'sdfdsfsdf', '2014-06-04', 'pleymari'),
+(2, 'profile01', 1, NULL, '2014-06-08', 'pleymari'),
+(3, 'profile02', 1, NULL, '2014-06-08', 'veroclar'),
+(4, 'profile03', 1, NULL, '2014-06-08', 'brascore'),
+(5, 'profile04', 1, NULL, '2014-06-08', 'gdietsch'),
+(6, 'profile05', 1, NULL, '2014-06-08', 'herbinir');
 
 -- --------------------------------------------------------
 
@@ -76,12 +85,15 @@ INSERT INTO `image` (`id`, `source`, `visible`, `legende`, `dateUpload`, `loginE
 
 CREATE TABLE IF NOT EXISTS `infos_profil` (
   `loginEtudiant` varchar(255) NOT NULL DEFAULT '',
-  `avatar` int(11) NOT NULL,
   `tel` int(10) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `adresse` varchar(255) DEFAULT NULL,
+  `adresse` int(11) NOT NULL,
   `orientation` char(1) NOT NULL,
+  `semestre` char(4) NOT NULL,
+  `avatar` int(11) NOT NULL,
   PRIMARY KEY (`loginEtudiant`),
+  UNIQUE KEY `loginEtudiant` (`loginEtudiant`),
+  KEY `adresse` (`adresse`),
   KEY `avatar` (`avatar`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -89,8 +101,11 @@ CREATE TABLE IF NOT EXISTS `infos_profil` (
 -- Contenu de la table `infos_profil`
 --
 
-INSERT INTO `infos_profil` (`loginEtudiant`, `avatar`, `tel`, `email`, `adresse`, `orientation`) VALUES
-('pleymari', 1, 667047496, 'dsffd', 'sdfsfdsf', 'f');
+INSERT INTO `infos_profil` (`loginEtudiant`, `tel`, `email`, `adresse`, `orientation`, `semestre`, `avatar`) VALUES
+('brascore', 659010101, 'brascore@etu.utc.fr', 1, 'F', 'GI02', 1),
+('gdietsch', NULL, 'gdietsch@etu.utc.fr', 2, 'F', 'GI02', 2),
+('herbinir', 659456255, 'herbinr@etu.utc.fr', 3, 'H', 'GI02', 6),
+('veroclar', 659235865, 'veroclar@etu.utc.fr', 4, 'B', 'TC04', 4);
 
 -- --------------------------------------------------------
 
@@ -229,7 +244,8 @@ ALTER TABLE `image`
 -- Contraintes pour la table `infos_profil`
 --
 ALTER TABLE `infos_profil`
-  ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`),
+  ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`),
+  ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`adresse`) REFERENCES `quartier` (`id`),
   ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`);
 
 --
