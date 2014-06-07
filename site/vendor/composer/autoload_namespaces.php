@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Httpful' => array($vendorDir . '/nategood/httpful/src'),
+    'Ginger' => array($vendorDir . '/ginger/client'),
     'DebugBar' => array($vendorDir . '/maximebf/debugbar/src'),
     'Atomik' => array($vendorDir . '/atomik/atomik/src'),
 );
