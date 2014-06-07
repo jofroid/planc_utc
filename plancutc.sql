@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Juin 2014 à 23:27
+-- Généré le: Sam 07 Juin 2014 à 23:45
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `dateUpload` date NOT NULL,
   `loginEtudiant` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `loginEtudiant` (`loginEtudiant`)
+  KEY `image_ibfk_1` (`loginEtudiant`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `infos_profil` (
   `sexe` char(1) NOT NULL,
   PRIMARY KEY (`loginEtudiant`),
   UNIQUE KEY `loginEtudiant` (`loginEtudiant`),
-  KEY `adresse` (`adresse`),
-  KEY `avatar` (`avatar`)
+  KEY `avatar` (`avatar`),
+  KEY `infos_profil_ibfk_1` (`adresse`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -121,8 +121,8 @@ CREATE TABLE IF NOT EXISTS `permissions_tel` (
   `loginEtudiant` varchar(8) NOT NULL,
   `loginFriend` varchar(8) NOT NULL,
   PRIMARY KEY (`idPermission`),
-  KEY `loginEtudiant` (`loginEtudiant`),
-  KEY `loginFriend` (`loginFriend`)
+  KEY `permissions_tel_ibfk_1` (`loginEtudiant`),
+  KEY `permissions_tel_ibfk_2` (`loginFriend`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `superwink` (
   `loginDestinataire` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `loginExpediteur` (`loginExpediteur`),
-  KEY `loginDestinataire` (`loginDestinataire`)
+  KEY `superwink_ibfk_2` (`loginDestinataire`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `uv_etudiant` (
   `codeUV` varchar(255) NOT NULL DEFAULT '',
   `loginEtudiant` varchar(8) NOT NULL DEFAULT '',
   PRIMARY KEY (`codeUV`,`loginEtudiant`),
-  KEY `loginEtudiant` (`loginEtudiant`)
+  KEY `uv_etudiant_ibfk_2` (`loginEtudiant`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -244,8 +244,8 @@ CREATE TABLE IF NOT EXISTS `wink` (
   `loginExpediteur` varchar(8) NOT NULL,
   `loginDestinataire` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `loginExpediteur` (`loginExpediteur`),
-  KEY `loginDestinataire` (`loginDestinataire`)
+  KEY `wink_ibfk_1` (`loginExpediteur`),
+  KEY `wink_ibfk_2` (`loginDestinataire`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -267,43 +267,43 @@ INSERT INTO `wink` (`id`, `date`, `loginExpediteur`, `loginDestinataire`) VALUES
 -- Contraintes pour la table `image`
 --
 ALTER TABLE `image`
-  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `infos_profil`
 --
 ALTER TABLE `infos_profil`
-  ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`adresse`) REFERENCES `quartier` (`id`),
-  ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`),
-  ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`adresse`) REFERENCES `quartier` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `permissions_tel`
 --
 ALTER TABLE `permissions_tel`
-  ADD CONSTRAINT `permissions_tel_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`),
-  ADD CONSTRAINT `permissions_tel_ibfk_2` FOREIGN KEY (`loginFriend`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `permissions_tel_ibfk_2` FOREIGN KEY (`loginFriend`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permissions_tel_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `superwink`
 --
 ALTER TABLE `superwink`
-  ADD CONSTRAINT `superwink_ibfk_1` FOREIGN KEY (`loginExpediteur`) REFERENCES `etudiant` (`login`),
-  ADD CONSTRAINT `superwink_ibfk_2` FOREIGN KEY (`loginDestinataire`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `superwink_ibfk_2` FOREIGN KEY (`loginDestinataire`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `superwink_ibfk_1` FOREIGN KEY (`loginExpediteur`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `uv_etudiant`
 --
 ALTER TABLE `uv_etudiant`
-  ADD CONSTRAINT `uv_etudiant_ibfk_1` FOREIGN KEY (`codeUV`) REFERENCES `uv` (`codeUV`),
-  ADD CONSTRAINT `uv_etudiant_ibfk_2` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `uv_etudiant_ibfk_2` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `uv_etudiant_ibfk_1` FOREIGN KEY (`codeUV`) REFERENCES `uv` (`codeUV`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `wink`
 --
 ALTER TABLE `wink`
-  ADD CONSTRAINT `wink_ibfk_1` FOREIGN KEY (`loginExpediteur`) REFERENCES `etudiant` (`login`),
-  ADD CONSTRAINT `wink_ibfk_2` FOREIGN KEY (`loginDestinataire`) REFERENCES `etudiant` (`login`);
+  ADD CONSTRAINT `wink_ibfk_2` FOREIGN KEY (`loginDestinataire`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wink_ibfk_1` FOREIGN KEY (`loginExpediteur`) REFERENCES `etudiant` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
