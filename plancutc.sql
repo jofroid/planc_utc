@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Juin 2014 à 19:23
+-- Généré le: Sam 07 Juin 2014 à 22:04
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -37,6 +37,13 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `etudiant`
+--
+
+INSERT INTO `etudiant` (`login`, `nom`, `prenom`, `age`, `sexe`) VALUES
+('pleymari', 'Leymarie', 'Pierre-Gilles', 19, 'h');
+
 -- --------------------------------------------------------
 
 --
@@ -52,7 +59,14 @@ CREATE TABLE IF NOT EXISTS `image` (
   `loginEtudiant` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `loginEtudiant` (`loginEtudiant`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `image`
+--
+
+INSERT INTO `image` (`id`, `source`, `visible`, `legende`, `dateUpload`, `loginEtudiant`) VALUES
+(1, 'http://lfskdlfmsdkmf.fr', 1, 'sdfdsfsdf', '2014-06-04', 'pleymari');
 
 -- --------------------------------------------------------
 
@@ -66,9 +80,17 @@ CREATE TABLE IF NOT EXISTS `infos_profil` (
   `tel` int(10) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `adresse` varchar(255) DEFAULT NULL,
+  `orientation` char(1) NOT NULL,
   PRIMARY KEY (`loginEtudiant`),
   KEY `avatar` (`avatar`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `infos_profil`
+--
+
+INSERT INTO `infos_profil` (`loginEtudiant`, `avatar`, `tel`, `email`, `adresse`, `orientation`) VALUES
+('pleymari', 1, 667047496, 'dsffd', 'sdfsfdsf', 'f');
 
 -- --------------------------------------------------------
 
@@ -105,6 +127,34 @@ CREATE TABLE IF NOT EXISTS `permissions_tel` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `quartier`
+--
+
+CREATE TABLE IF NOT EXISTS `quartier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Contenu de la table `quartier`
+--
+
+INSERT INTO `quartier` (`id`, `nom`) VALUES
+(1, 'Bellicart'),
+(2, 'Les Capucins - Saint Germain'),
+(3, 'Centre Ville'),
+(4, 'Le Clos des Roses'),
+(5, 'Les Jardins'),
+(6, 'Le Petit Margny'),
+(7, 'Royalieu - Pompidou'),
+(8, 'La Victoire - Les Maréchaux'),
+(9, 'Saint Lazare - Les Avenues'),
+(10, 'Margny');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `superwink`
 --
 
@@ -128,6 +178,13 @@ CREATE TABLE IF NOT EXISTS `uv` (
   `codeUV` varchar(10) NOT NULL DEFAULT '',
   PRIMARY KEY (`codeUV`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `uv`
+--
+
+INSERT INTO `uv` (`codeUV`) VALUES
+('LO21');
 
 -- --------------------------------------------------------
 
