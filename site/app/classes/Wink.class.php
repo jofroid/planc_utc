@@ -1,5 +1,5 @@
 <?php
-Class Store {
+Class Wink {
 
 
 	function __construct ()
@@ -16,20 +16,22 @@ Class Store {
 				INNER JOIN image ON image.id = avatar 
 				WHERE sexe = ?
 				AND login != ?
-				
+				ORDER BY abs(age-?)
 				');
-		$stmt->execute(array($orientation,$login_user));
+		$stmt->execute(array($orientation,$login_user,$age));
 		$i = 0;
 		while($donnees = $stmt->fetch())
 		{
 			$prenom[$i] = $donnees['prenom'];
 			$nom[$i] = $donnees['nom'];
 			$age[$i] = $donnees['age'];
+			$source[$i] = $donnees['source'];
+
 			$i++;
 		}
 		if($i > 0)
 		{
-			return array($prenom,$nom,$age,);
+			return array($prenom,$nom,$age,$source); 
 		}
 		else
 		{
@@ -37,6 +39,26 @@ Class Store {
 		}
 		
 	}
+
+	public function sendWink($loginExpediteur, $loginDestinataire)
+	{
+		$fields = array(
+		    'loginExpediteur' => array('required' => true),
+		    'loginDestinataire' => array('required' => true)
+		);
+
+		if (($data = $this->filter($_POST, $fields)) === false) {
+		    $this->flash($this['app.filters.messages'], 'error');
+		    return;
+		}
+
+		$this->db->insert('wink', $data);
+
+		$this->flash('Post successfully added!', 'success');
+		$this->redirect('index');
+	}
+
+	
 	
 	
 	
