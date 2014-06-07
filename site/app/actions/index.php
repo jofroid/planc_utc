@@ -9,5 +9,7 @@ if(isset($_GET['login']))
 		$this->flash('La connexion a échoué.', 'error');
 if(isset($_GET['logout']))
 	$this->flash('Vous vous êtes déconnecté avec succès.');
-$login=Atomik::get('session.prenom')." ".Atomik::get('session.nom');
+if(isset($_GET['forbidden']))
+	$this->flash("Vous n'êtes pas autorisé à accéder à cette page.");
+$login=Atomik::get('session.login');
 $snake=$_CONFIG['self_url']."?action=snake";
