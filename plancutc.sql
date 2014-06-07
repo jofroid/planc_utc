@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Juin 2014 à 23:14
+-- Généré le: Sam 07 Juin 2014 à 23:27
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -105,25 +105,9 @@ CREATE TABLE IF NOT EXISTS `infos_profil` (
 
 INSERT INTO `infos_profil` (`loginEtudiant`, `tel`, `adresse`, `orientation`, `semestre`, `avatar`, `age`, `sexe`) VALUES
 ('brascore', 659010101, 1, 'F', 'GI02', 1, 21, 'H'),
-('gdietsch', NULL, 2, 'F', 'GI02', 2, 21, 'H'),
+('gdietsch', 659010638, 2, 'F', 'GI02', 2, 21, 'H'),
 ('herbinir', 659456255, 3, 'H', 'GI02', 6, 21, 'H'),
 ('veroclar', 659235865, 4, 'B', 'TC04', 4, 17, 'H');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `permissions_adr`
---
-
-CREATE TABLE IF NOT EXISTS `permissions_adr` (
-  `idPermission` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
-  `loginEtudiant` varchar(8) NOT NULL,
-  `loginFriend` varchar(8) NOT NULL,
-  PRIMARY KEY (`idPermission`),
-  KEY `loginEtudiant` (`loginEtudiant`),
-  KEY `loginFriend` (`loginFriend`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -139,7 +123,15 @@ CREATE TABLE IF NOT EXISTS `permissions_tel` (
   PRIMARY KEY (`idPermission`),
   KEY `loginEtudiant` (`loginEtudiant`),
   KEY `loginFriend` (`loginFriend`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `permissions_tel`
+--
+
+INSERT INTO `permissions_tel` (`idPermission`, `date`, `loginEtudiant`, `loginFriend`) VALUES
+(1, '2014-06-08', 'gdietsch', 'herbinir'),
+(2, '2014-06-08', 'gdietsch', 'brascore');
 
 -- --------------------------------------------------------
 
@@ -183,7 +175,15 @@ CREATE TABLE IF NOT EXISTS `superwink` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `loginExpediteur` (`loginExpediteur`),
   KEY `loginDestinataire` (`loginDestinataire`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `superwink`
+--
+
+INSERT INTO `superwink` (`id`, `date`, `loginExpediteur`, `loginDestinataire`) VALUES
+(1, '2014-06-08', 'brascore', 'veroclar'),
+(2, '2014-06-08', 'gdietsch', 'veroclar');
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,12 @@ CREATE TABLE IF NOT EXISTS `uv` (
 --
 
 INSERT INTO `uv` (`codeUV`) VALUES
-('LO21');
+('BL01'),
+('CM11'),
+('IA01'),
+('LO21'),
+('MI01'),
+('MT90');
 
 -- --------------------------------------------------------
 
@@ -215,6 +220,17 @@ CREATE TABLE IF NOT EXISTS `uv_etudiant` (
   PRIMARY KEY (`codeUV`,`loginEtudiant`),
   KEY `loginEtudiant` (`loginEtudiant`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `uv_etudiant`
+--
+
+INSERT INTO `uv_etudiant` (`codeUV`, `loginEtudiant`) VALUES
+('IA01', 'brascore'),
+('LO21', 'brascore'),
+('MI01', 'brascore'),
+('BL01', 'veroclar'),
+('CM11', 'veroclar');
 
 -- --------------------------------------------------------
 
@@ -230,7 +246,18 @@ CREATE TABLE IF NOT EXISTS `wink` (
   PRIMARY KEY (`id`),
   KEY `loginExpediteur` (`loginExpediteur`),
   KEY `loginDestinataire` (`loginDestinataire`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `wink`
+--
+
+INSERT INTO `wink` (`id`, `date`, `loginExpediteur`, `loginDestinataire`) VALUES
+(1, '2014-06-08', 'brascore', 'veroclar'),
+(2, '2014-06-08', 'gdietsch', 'veroclar'),
+(3, '2014-06-08', 'herbinir', 'pleymari'),
+(4, '2014-06-08', 'herbinir', 'gdietsch'),
+(5, '2014-06-08', 'herbinir', 'brascore');
 
 --
 -- Contraintes pour les tables exportées
@@ -249,13 +276,6 @@ ALTER TABLE `infos_profil`
   ADD CONSTRAINT `infos_profil_ibfk_1` FOREIGN KEY (`adresse`) REFERENCES `quartier` (`id`),
   ADD CONSTRAINT `infos_profil_ibfk_2` FOREIGN KEY (`avatar`) REFERENCES `image` (`id`),
   ADD CONSTRAINT `infos_profil_ibfk_3` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`);
-
---
--- Contraintes pour la table `permissions_adr`
---
-ALTER TABLE `permissions_adr`
-  ADD CONSTRAINT `permissions_adr_ibfk_1` FOREIGN KEY (`loginEtudiant`) REFERENCES `etudiant` (`login`),
-  ADD CONSTRAINT `permissions_adr_ibfk_2` FOREIGN KEY (`loginFriend`) REFERENCES `etudiant` (`login`);
 
 --
 -- Contraintes pour la table `permissions_tel`
