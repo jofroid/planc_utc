@@ -1,15 +1,11 @@
 <?php
 
 // your action code goes here
-require '/Cas/Cas.php';
-use \Plancutc\cas;
-
-$res="non identifie";
-if(isset($_GET['ticket']))
-{	
-	$connec=new Cas("https://cas.utc.fr/cas/");
-	if($connec->authenticate($_GET['ticket'], "http://localhost:8080/PlancUTC/planc_utc/site/"))
-		$res="ca marche";
-	else
-		$res="marche pas";
-}
+if(isset($_GET['login']))	
+	if($_GET['login'])
+		$this->flash('Vous êtes maintenant connecté.');
+	else	
+		$this->flash('La connexion a échoué.', 'error');
+if(isset($_GET['logout']))
+	$this->flash('Vous vous êtes déconnecté avec succès.');
+$login=Atomik::get('session.username');

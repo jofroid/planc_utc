@@ -1,4 +1,15 @@
+  <?php
+    foreach (Atomik::get('flash_messages') as $label => $messages) 
+    {
+      foreach ($messages as $message) 
+      {
+          echo $message;
+      }
+    } 
+  ?>
 <div class="hero-unit">
+
+  <?php if($login) echo "Bonjour, ".$login; ?>
   <h1>Welcome to <strong>PLANC'UTC</strong></h1>
   <p>
    Le site de rencontre pour Utcéens exigeants !
@@ -40,4 +51,3 @@
         <a href="https://github.com/maximebf/atomik" class="btn">Atomik on Github &raquo;</a>
     </div>
 </div>
-<?php echo $res; ?>
