@@ -21,3 +21,9 @@ Atomik::set(array(
     'atomik.debug' => true
     
 ));
+
+Atomik::set('plugins.Db', array(
+    'dsn' => 'mysql:host=localhost;dbname=plancutc',
+    'username' => 'root',
+    'password' => ''
+));
