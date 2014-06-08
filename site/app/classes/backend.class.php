@@ -41,7 +41,7 @@ Class Backend_quartiers
 	}
 
 
-	public function get_profile_correspond()
+	public function get_quartiers()
 	{
 		$stmt = $this->db->prepare('SELECT id, nom FROM quartier;');
 		$stmt->execute();
@@ -54,11 +54,17 @@ Class Backend_quartiers
 		}
 		if($i > 0)
 		{
-			return array($login, $prenom,$nom);
+			return array($id, $nom);
 		}
 		else
 		{
 			return null;
 		}
+	}
+
+	public function create($nom)
+	{
+		$stmt = $this->db->prepare("INSERT INTO quartier (id, nom) VALUES (NULL, '".Atomik::escape($nom)."');");
+		$stmt->execute();
 	}
 };
