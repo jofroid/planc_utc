@@ -50,6 +50,7 @@ Class Store {
 				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
 				LEFT JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
 				LEFT JOIN image ON id = avatar
+				LEFT JOIN wink ON loginDestinataire = login
 				WHERE sexe = ?
 				AND (orientation = ? OR orientation = "B")
 				AND login != ?
@@ -64,6 +65,7 @@ Class Store {
 				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
 				LEFT JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
 				LEFT JOIN image ON id = avatar
+				LEFT JOIN wink ON loginDestinataire = login
 				WHERE (orientation = ? OR orientation = "B")
 				AND login != ?
 				ORDER BY abs(age-?)
@@ -78,7 +80,7 @@ Class Store {
         $i = 0;
         while($donnees = $req->fetch())
         {
-            $tab[$i+1] = array('login' => $donnees['login'], 'prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'semestre' => $donnees['semestre'], 'age' => $donnees['age'], 'source' => $donnees['source']);
+            $tab[$i+1] = array('login' => $donnees['login'], 'prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'semestre' => $donnees['semestre'], 'age' => $donnees['age'], 'source' => $donnees['source'],'wink_login' => $donnees['loginDestinataire']);
             $i++;
         }
         $tab[0] = array('number' => $i);

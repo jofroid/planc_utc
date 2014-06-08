@@ -43,29 +43,46 @@ function analyze_profile(profiles)
 {
 	for(var i=1; i<=profiles[0]["number"]; i++)
     {
-        display_profile(profiles[i]["login"],profiles[i]["prenom"],profiles[i]["semestre"],profiles[i]["source"]);
+        display_profile(profiles[i]["login"],profiles[i]["prenom"],profiles[i]["semestre"],profiles[i]["source"], profiles[i]["wink_login"]);
     }
 }
 
-function display_profile(login,prenom, semestre, image_src)
+function display_profile(login,prenom, semestre, image_src, wink_login)
 {
-	var element = document.createElement('div');
-	var prenom_element = document.createElement('div');
-    var semestre_element = document.createElement('div');
+	//var element = document.createElement('div');
+    var tuile = document.createElement('div');
+	var prenom_element = document.createElement('span');
     var image =document.createElement('img');
+    var tuile_wink = document.createElement('div');
+
+    //element.className = "tuile-center";
+    tuile.className = "tuile";
+    prenom_element.className ="tuile-title";
+    
+    image.className = "tuile-img";
 
     prenom_element.innerText = prenom;
-    semestre_element.innerText = semestre; 
+    if(wink_login == null)
+    {
+        tuile_wink.className = "tuile-wink";
+    }
+    else
+    {
+        tuile_wink.className = "tuile-wink-red";
+    }
+   
     image.src= CheminRepertoire + "/assets/images/profile_picture/" + image_src +'.jpg';
-    image.width = 300;
-    image.height = 200;
 
-    element.appendChild(image);
-    element.appendChild(prenom_element);
-    element.appendChild(semestre_element);
-	document.getElementById('main').appendChild(element);
-     element.addEventListener('click', function(){
+    //element.appendChild(tuile);
+    tuile.appendChild(image);
+    tuile.appendChild(prenom_element);
+    tuile.appendChild(tuile_wink);
+
+
+	document.getElementById('main').appendChild(tuile);
+     tuile_wink.addEventListener('click', function(){
                           send_Wink(login);
+                          tuile_wink.className = "tuile-wink-red";
                          });
 
 }

@@ -24,7 +24,7 @@ Class Wink {
 		}
 		else
 		{
-			return false;
+			
 		}
 
 	}
