@@ -1,61 +1,12 @@
-  <?php
-    foreach (Atomik::get('flash_messages') as $label => $messages) 
-    {
-      foreach ($messages as $message) 
-      {
-          echo $message;
-      }
-    } 
-  ?>
-<div class="hero-unit">
+ <link href="<?php echo $this->asset('assets/css/accueil.css') ?>" rel="stylesheet">
 
-  <?php if($login) echo "Bonjour, ".$login; ?>
-  <h1>Welcome to <strong>PLANC'UTC</strong></h1>
-  <p>
-   Le site de rencontre pour Utcéens exigeants !
-    <a href="http://atomikframework.com/docs/get-started.html">Get Started</a> tutorial.
-  </p>
-  <p><a class="btn btn-large" href="http://atomikframework.com/docs">Read the documentation &raquo;</a></p>
-</div>
-
-<div class="row">
-
-    <div class="span4">
-        <h2>Create your first action</h2>
-        <p>
-          Start building your application on top of this skeleton.
-          Create your first action in <em>app/actions/index.php</em>
-          and replace this view in <em>app/views/index.phtml</em>.
-          This skeleton app comes preconfigured with Twitter Bootstrap
-          and jQuery!
-        </p>
+<div class="accueil">
+      <div class="accueil-logo">
+        <a href=""></a>
+      </div>
+      <div class="row">
+        <div class="col-lg-5 col-md-4 col-sm-4 col-xs-2"></div>
+        <div class="co-cas col-lg-2 col-md-4 col-sm-4 col-xs-8"><a href="?action=login"><button type="button" class="btn btn-primary btn-lg">Connexion CAS</button></a></div>
+        <div class="col-lg-5 col-md-4 col-sm-4 col-xs-2"></div>
+      </div>
     </div>
-
-    <div class="span4">
-        <h2>Use plugins</h2>
-        <p>
-          Install plugins into <em>app/plugins</em> and activate them
-          in your configuration. Atomik is bundled with a few of them
-          to get you started as quickly as possible. This skeleton is
-          already using some of them.
-        </p>
-        <a href="https://github.com/maximebf/atomik/tree/master/src/plugins" class="btn">List of bundled plugins &raquo;</a>
-    </div>
-
-    <div class="span4">
-        <h2>Get Involved</h2>
-        <p>
-          Get involved in the development of Atomik. Report issues
-          and submit pull requests on Github. Any ideas are welcomed!
-        </p>
-        <a href="https://github.com/maximebf/atomik" class="btn">Atomik on Github &raquo;</a>
-    </div>
-</div>
-<script>
-surprise = new eegg()
-surprise.code = function() { window.location = <?php echo '"'.$snake.'"'; ?>}
-surprise.load()
-surprise2 = new eegg2()
-surprise2.code = function() { window.location = <?php echo '"'.$pong.'"'; ?>}
-surprise2.load()
-</script>

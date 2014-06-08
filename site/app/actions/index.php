@@ -3,6 +3,7 @@ require '/config.php';
 require '/app/classes/permission.class.php';
 
 // your action code goes here
+Atomik::disableLayout();
 if(isset($_GET['login']))	
 	if($_GET['login'])
 		$this->flash('Vous êtes maintenant connecté.');
