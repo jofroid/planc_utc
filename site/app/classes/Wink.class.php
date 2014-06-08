@@ -10,7 +10,7 @@ Class Wink {
 
 	public function get_profile_correspond($login_user,$age,$orientation)
 	{
-		$stmt = $this->db->prepare('SELECT * FROM etudiant 
+		$req = $this->db->prepare('SELECT * FROM etudiant 
 				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
 				INNER JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
 				INNER JOIN image ON image.id = avatar 
@@ -18,9 +18,9 @@ Class Wink {
 				AND login != ?
 				ORDER BY abs(age-?)
 				');
-		$stmt->execute(array($orientation,$login_user,$age));
+		$req->execute(array($orientation,$login_user,$age));
 		$i = 0;
-		while($donnees = $stmt->fetch())
+		while($donnees = $req->fetch())
 		{
 			$prenom[$i] = $donnees['prenom'];
 			$nom[$i] = $donnees['nom'];
@@ -40,22 +40,16 @@ Class Wink {
 		
 	}
 
-	public function sendWink($loginExpediteur, $loginDestinataire)
+	public function sendWink($date,$loginExpediteur, $loginDestinataire)
 	{
-		$fields = array(
-		    'loginExpediteur' => array('required' => true),
-		    'loginDestinataire' => array('required' => true)
-		);
 
-		if (($data = $this->filter($_POST, $fields)) === false) {
-		    $this->flash($this['app.filters.messages'], 'error');
-		    return;
-		}
+		$req = $this->db->prepare('INSERT INTO wink 
+				(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
+				');
+		$req->execute(array($date,$loginExpediteur,$loginDestinataire));
 
-		$this->db->insert('wink', $data);
 
-		$this->flash('Post successfully added!', 'success');
-		$this->redirect('index');
+
 	}
 
 	
