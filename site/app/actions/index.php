@@ -15,3 +15,4 @@ if(isset($_GET['forbidden']))
 $_p=new Permission();
 $login=$_p->getLogin();
 $snake=$_CONFIG['self_url']."?action=snake";
+$pong=$_CONFIG['self_url']."?action=pong";
