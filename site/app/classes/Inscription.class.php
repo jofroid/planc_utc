@@ -13,7 +13,7 @@ class Inscription
 		return $res;
 	}
 	
-	public function check_upload_img()
+	/*public function check_upload_img()
 	{
 		$erreur = NULL;
 		$maxsize = 1024*50;
@@ -36,7 +36,7 @@ class Inscription
 			$image_sizes = getimagesize($_FILES['avatar']['tmp_name']);
 			$width = 350;
 			$height = 250;
-			if (1 == 2 /*$image_sizes[0] >= $width OR $image_sizes[1] >= $height*/) 
+			if (1 == 2 $image_sizes[0] >= $width OR $image_sizes[1] >= $height) 
 			{
 				$erreur = "Taille d'image incorrecte";
 				return $erreur;
@@ -52,11 +52,11 @@ class Inscription
 					return "good";
 				}
 			}		
-	}
+	}*/
 	
 	public function insertInscription() {
-		$avatar_test = $this->check_upload_img();
-		echo $avatar_test; die;
+		//$avatar_test = $this->check_upload_img();
+		//echo $avatar_test; die;
 		$data 	= 	array(
 						'loginEtudiant' => Atomik::get('session.login'),
 						'age' => $_POST['age'], 
@@ -69,8 +69,4 @@ class Inscription
 					);
 		$this->db->insert("infos_profil", $data);	
 	}
-	
-	
-
-	
 };
