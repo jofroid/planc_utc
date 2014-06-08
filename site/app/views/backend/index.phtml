@@ -4,7 +4,7 @@
 $i=0;
 foreach($logins as $login)
 {
-	echo"<tr><td>$login</td><td>$noms[$i]</td><td>$prenoms[$i]</td><td><form method='POST' action='?backend/deleteEtu.php'><input type='hidden' name='login' value='$login'><input type='submit' value='Supprimer'></form></td></tr>";
+	echo"<tr><td>$login</td><td>$noms[$i]</td><td>$prenoms[$i]</td><td><form method='POST' action='?action=backend/deleteEtu.php'><input type='hidden' name='login' value='$login'><input type='submit' value='Supprimer'></form></td></tr>";
 	$i++;
 }
 ?>

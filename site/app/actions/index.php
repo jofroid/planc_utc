@@ -12,5 +12,6 @@ if(isset($_GET['logout']))
 	$this->flash('Vous vous êtes déconnecté avec succès.');
 if(isset($_GET['forbidden']))
 	$this->flash("Vous n'êtes pas autorisé à accéder à cette page.");
-$login=Atomik::get('session.login');
+$_p=new Permission();
+$login=$_p->getLogin();
 $snake=$_CONFIG['self_url']."?action=snake";
