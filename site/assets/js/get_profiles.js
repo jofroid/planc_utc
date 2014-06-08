@@ -36,7 +36,6 @@ function get_profiles()
  
         xhr_refresh.send(null);
  
-        return xhr_refresh;
 }
 
 
@@ -44,11 +43,11 @@ function analyze_profile(profiles)
 {
 	for(var i=1; i<=profiles[0]["number"]; i++)
     {
-        display_profile(profiles[i]["prenom"],profiles[i]["semestre"],profiles[i]["source"]);
+        display_profile(profiles[i]["login"],profiles[i]["prenom"],profiles[i]["semestre"],profiles[i]["source"]);
     }
 }
 
-function display_profile(prenom, semestre, image_src)
+function display_profile(login,prenom, semestre, image_src)
 {
 	var element = document.createElement('div');
 	var prenom_element = document.createElement('div');
