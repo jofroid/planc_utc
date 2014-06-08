@@ -64,5 +64,8 @@ function display_profile(login,prenom, semestre, image_src)
     element.appendChild(prenom_element);
     element.appendChild(semestre_element);
 	document.getElementById('main').appendChild(element);
+     element.addEventListener('click', function(){
+                          send_Wink(login);
+                         });
 
 }

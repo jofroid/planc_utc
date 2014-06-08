@@ -1,5 +1,11 @@
-
-
+var CheminRepertoire;
+jQuery(document).ready(function(){
+ 
+    serveur = "http://" + location.host;
+    var CheminComplet = document.location.href;
+    CheminRepertoire  = CheminComplet.substring( 0 ,CheminComplet.lastIndexOf( "/" ) );
+    
+});
 
 
 
@@ -19,6 +25,7 @@ function send_Wink(loginDestinataire)
             if (xhr_send.readyState == 4 && xhr_send.status == 200)
             {
                 update_picture_wink(loginDestinataire);
+                console.log(xhr_send.responseText);
             }
              else if(xhr_send.readyState == 4 && xhr_send.status != 200) 
              { // En cas d'erreur !
@@ -27,7 +34,7 @@ function send_Wink(loginDestinataire)
              }
         };
  
-        xhr_send.send("?loginDestinataire=" + loginDestinataire);
+        xhr_send.send("loginDestinataire=" + loginDestinataire);
 }
 
 function update_picture_wink(loginDestinataire)

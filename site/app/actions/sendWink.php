@@ -1,5 +1,5 @@
 <?php
-
+	Atomik::disableLayout();
 	require_once 'app/classes/Wink.class.php';
 	require_once 'app/classes/permission.class.php';
 	use \Plancutc\app\classes;
@@ -9,7 +9,7 @@
 	{
 		$login_user = $permission->getLogin();
 		$wink = new Wink();
-		if($permission->loginExist($_POST['loginDestinataire']))
+		if($permission->loginExist($_POST['loginDestinataire']) == 1)
 		{
 			$wink->sendWink(date("Y:m:d"),$login_user,$_POST['loginDestinataire']);
 		}
