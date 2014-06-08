@@ -12,7 +12,10 @@ Class Wink {
 	public function sendWink($date,$loginExpediteur, $loginDestinataire)
 	{
 		if( ($loginExpediteur != $loginDestinataire) && !$this->winkExist($loginExpediteur, $loginDestinataire) )
-		{
+		{	
+			$this->matchWink($loginExpediteur);
+			
+			die;
 			$req = $this->db->prepare('INSERT INTO wink 
 				(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
 				');
@@ -21,9 +24,13 @@ Class Wink {
 		}
 		else
 		{
-			return false;
+			
 		}
 
+	}
+	
+	public function matchWink($loginExpediteur) {
+		return $this->db->selectOne("Wink", "loginDestinataire = '" . Atomik::get("session.login") . "' AND loginExpediteur = '" . Atomik::escape($loginExpediteur) . "';") ?  true : false;
 	}
 
 	public function winkExist($loginExpediteur, $loginDestinataire)
@@ -69,12 +76,5 @@ Class Wink {
 			return null;
 		}
 	}
-
-	
-	
-	
-	
 };
-
-?>
 

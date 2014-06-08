@@ -19,8 +19,8 @@ class Inscription
 		$maxsize = 1024*50;
 		if($_FILES['avatar']['size'] > $maxsize)
 		{
-			$erreur = "Le fichier est trop gros";
-			return $erreur;
+			atomik::flash("Le fichier est trop gros");
+			atomik::redirect("inscription");
 		}
 		$extensions_valides = array( 'jpg' , 'jpeg' , 'png' );
 			//1. strrchr renvoie l'extension avec le point (« . »).
@@ -29,8 +29,8 @@ class Inscription
 			$extension_upload = strtolower(  substr(  strrchr($_FILES['avatar']['name'], '.')  ,1)  );
 			if ( !in_array($extension_upload,$extensions_valides) )
 			{
-				$erreur = "L'extension incorrecte";
-				return $erreur; 
+				atomik::flash("L'extension incorrecte");
+				atomik::redirect("inscription");
 			}
 
 			$image_sizes = getimagesize($_FILES['avatar']['tmp_name']);
@@ -55,9 +55,10 @@ class Inscription
 		$avatar	=	array(
 						'visible' => 1,
 						'source' => $avatar_test,
-						'dateUpload' => time(),
+						'dateUpload' =>  date("Y-m-d"),
 						'loginEtudiant' => Atomik::get('session.login')
 					);
+		
 		$this->db->insert("image", $avatar);
 		$id_avatar = $this->db->selectOne("image", "source = '".$avatar_test."'");
 		$avatar_test = $this->check_upload_img();
