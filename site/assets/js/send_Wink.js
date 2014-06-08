@@ -13,9 +13,9 @@ jQuery(document).ready(function(){
 
 
 
+ 
 
-
-function send_Wink(loginDestinataire)
+function send_Wink(loginDestinataire,tuile_wink)
 {
 	var xhr_send = new XMLHttpRequest();
 
@@ -25,6 +25,15 @@ function send_Wink(loginDestinataire)
             if (xhr_send.readyState == 4 && xhr_send.status == 200)
             {
                 update_picture_wink(loginDestinataire);
+                if(tuile_wink.className == "tuile-wink-red")
+                {
+                    tuile_wink.className = "tuile-wink";
+                }
+                else
+                {
+                    tuile_wink.className = "tuile-wink-red";
+                }
+                
                 console.log(xhr_send.responseText);
             }
              else if(xhr_send.readyState == 4 && xhr_send.status != 200) 

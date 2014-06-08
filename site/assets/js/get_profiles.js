@@ -81,8 +81,9 @@ function display_profile(login,prenom, semestre, image_src, wink_login)
 
 	document.getElementById('main').appendChild(tuile);
      tuile_wink.addEventListener('click', function(){
-                          send_Wink(login);
-                          tuile_wink.className = "tuile-wink-red";
+                          send_Wink(login,tuile_wink );
+        
+                          
                          });
 
 }

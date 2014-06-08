@@ -54,6 +54,7 @@ DEBUT DE IMAGE
 }
 .tuile-wink:hover {
   background-image: url(images/wink-bhit.png);
+  cursor:pointer;
 }
 
 .tuile-wink-red {
@@ -65,6 +66,10 @@ DEBUT DE IMAGE
   top: -340px;
   left:90px;
   background-image: url(images/wink-bhit.png);
+}
+
+.tuile-wink-red:hover{
+  cursor:pointer;
 }
 
 .tuile-img {
