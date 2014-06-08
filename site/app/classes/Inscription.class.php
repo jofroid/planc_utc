@@ -47,7 +47,7 @@ class Inscription
 					return $nom;
 				}
 			}		
-	}*/
+	}
 	
 	public function insertInscription() {
 		$avatar_test = $this->check_upload_img();
