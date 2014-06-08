@@ -9,6 +9,8 @@ if (isset ($_GET['function'])) {
 	switch ($_GET['function']){
 		case 'update' : {
 			$i->insertModifs();
+			Atomik::flash("Votre profil a correctement été modifié");
+			Atomik::redirect("?action=moncompte");
 			break;
 		}
 	}

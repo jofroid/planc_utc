@@ -6,20 +6,9 @@ class Infos_profil
 		$this->db = Atomik::get('db');
 	}
 
-/*	public function maj_infos_profil($data) {
-		$fields = array(
-				'avatar' => array('required' => true),
-				'tel' => array('required' => true),
-				'email' => array('required' => true),
-				'adresse' => array('required' => true));
-		$this['db']->update("infos_profil", $fields);
-		
-	}
-*/
-	
+	/* Renvoi les informations de la table infos_profils */
 	public function getMesInfos(){
 		$res["infos_profil"] = $this->db->selectOne("infos_profil, quartier", "loginEtudiant = 'brascore' AND infos_profil.adresse=quartier.id;");
-		var_dump($res);
 		
 		$res["quartier"] =  $this->db->select("quartier", "nom != '". $res["infos_profil"]['nom']."'");
 		return $res;
@@ -27,10 +16,8 @@ class Infos_profil
 	
 	public function insertModifs() {
 		$quartier = $this->db->selectOne("quartier", "nom = '".$_POST['adresse']."'");
-		$data = array('tel' => $quartier['id'], 'adresse' => $_POST['telephone']);
-		
+		$data = array('tel' =>  $_POST['telephone'], 'adresse' => $quartier['id']);
 		$this->db->update("infos_profil", $data);	
-		var_dump($data);
 	}
 	
 };
