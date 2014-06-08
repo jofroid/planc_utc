@@ -17,7 +17,7 @@
         	<label id="adresse">Adresse : </label>
         	<select name="adresse">
         		<?php 
-        		echo("<option value='".$infos['infos_profil']['id']."'>".$infos['infos_profil']['nom']."</option>");
+        		echo("<option value='".$infos['infos_profil']['nom']."'>".$infos['infos_profil']['nom']."</option>");
         			foreach ($infos['quartier'] as $i)
         					echo("<option>".$i['nom']."</option>");?>
         	</select>

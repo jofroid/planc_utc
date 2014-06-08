@@ -17,6 +17,7 @@ class Infos_profil
 	public function updateModifs() {
 		if (strlen($_POST['telephone']) == 10){
 			$quartier = $this->db->selectOne("quartier", "nom = '". Atomik::escape($_POST['adresse'])."'");
+			
 			$data = array('tel' =>  Atomik::escape($_POST['telephone']), 'adresse' => $quartier['id']);
 			$this->db->update("infos_profil", $data);
 			return true;
