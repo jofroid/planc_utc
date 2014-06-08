@@ -30,7 +30,7 @@ Class Wink {
 	}
 	
 	public function matchWink($loginExpediteur) {
-		return $res = $this->db->selectOne("Wink", "loginDestinataire = '" . Atomik::get("session.login") . "' AND loginExpediteur = '" . $loginExpediteur . "';") ?  true : false;
+		return $this->db->selectOne("Wink", "loginDestinataire = '" . Atomik::get("session.login") . "' AND loginExpediteur = '" . $loginExpediteur . "';") ?  true : false;
 	}
 
 	public function winkExist($loginExpediteur, $loginDestinataire)
