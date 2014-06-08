@@ -8,48 +8,66 @@ Class Wink {
 	}
 
 
-	public function get_profile_correspond($login_user,$age,$orientation)
-	{
-		$req = $this->db->prepare('SELECT * FROM etudiant 
-				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
-				INNER JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
-				INNER JOIN image ON image.id = avatar 
-				WHERE sexe = ?
-				AND login != ?
-				ORDER BY abs(age-?)
-				');
-		$req->execute(array($orientation,$login_user,$age));
-		$i = 0;
-		while($donnees = $req->fetch())
-		{
-			$prenom[$i] = $donnees['prenom'];
-			$nom[$i] = $donnees['nom'];
-			$age[$i] = $donnees['age'];
-			$source[$i] = $donnees['source'];
 
-			$i++;
+	public function sendWink($date,$loginExpediteur, $loginDestinataire)
+	{
+		if( ($loginExpediteur != $loginDestinataire) && !$this->winkExist($loginExpediteur, $loginDestinataire) )
+		{
+			$req = $this->db->prepare('INSERT INTO wink 
+				(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
+				');
+			$req->execute(array($date,$loginExpediteur,$loginDestinataire));
+			return true;
 		}
+		else
+		{
+			return false;
+		}
+
+	}
+
+	public function winkExist($loginExpediteur, $loginDestinataire)
+	{
+		$req = $this->db->prepare('SELECT * FROM wink 
+				WHERE loginExpediteur = ?
+				AND loginDestinataire = ?
+				');
+			$req->execute(array($loginExpediteur,$loginDestinataire));
+		if($req->fetch())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function getWinkUser($loginUser)
+	{
+		$req = $this->db->prepare('SELECT * FROM wink 
+				WHERE loginExpediteur = ?
+				ORDER BY date
+				');
+		$req->execute(array($loginUser));
+		
+		$tab[0] = array('number' => 0);
+        $i = 0;
+        while($donnees = $req->fetch())
+        {
+            $tab[$i+1] = array('loginDestinataire' => $donnees['loginDestinataire'], 'date' => $donnees['date']);
+            $i++;
+        }
+        $tab[0] = array('number' => $i);
+        
 		if($i > 0)
 		{
-			return array($prenom,$nom,$age,$source); 
+			return $tab;
 		}
 		else
 		{
 			return null;
 		}
-		
-	}
-
-	public function sendWink($date,$loginExpediteur, $loginDestinataire)
-	{
-
-		$req = $this->db->prepare('INSERT INTO wink 
-				(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
-				');
-		$req->execute(array($date,$loginExpediteur,$loginDestinataire));
-
-
-
 	}
 
 	
@@ -59,5 +77,4 @@ Class Wink {
 };
 
 ?>
-
 
