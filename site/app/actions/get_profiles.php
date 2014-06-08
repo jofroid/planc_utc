@@ -1,5 +1,5 @@
 <?php
-
+	Atomik::disableLayout();
 	
 	require_once 'app/classes/Store.class.php';
 	use \Plancutc\app\classes;
