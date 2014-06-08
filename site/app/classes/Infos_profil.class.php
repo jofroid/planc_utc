@@ -22,4 +22,3 @@ class Infos_profil
 	
 };
 
-?>
