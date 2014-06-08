@@ -9,9 +9,10 @@
 	{
 		$login_user = $permission->getLogin();
 		$wink = new Wink();
-		if($permission->loginExist($_POST['loginDestinataire']) == 1)
+		echo $_GET['logindest'];
+		if($permission->loginExist($_GET['logindest']) == 1)
 		{
-			$wink->sendWink(date("Y:m:d"),$login_user,$_POST['loginDestinataire']);
+			$wink->sendWink(date("Y:m:d"),$login_user,$_GET['logindest']);
 		}
 		else
 		{

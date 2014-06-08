@@ -19,7 +19,7 @@ function send_Wink(loginDestinataire)
 {
 	var xhr_send = new XMLHttpRequest();
 
-        xhr_send.open('POST', CheminRepertoire + '/?action=sendWink');
+        xhr_send.open('GET', CheminRepertoire + '/?action=sendWink&logindest=' + loginDestinataire );
         xhr_send.onreadystatechange = function()
         {
             if (xhr_send.readyState == 4 && xhr_send.status == 200)
@@ -34,10 +34,10 @@ function send_Wink(loginDestinataire)
              }
         };
  
-        xhr_send.send("loginDestinataire=" + loginDestinataire);
+        xhr_send.send(null);
 }
 
 function update_picture_wink(loginDestinataire)
 {
-    alert(loginDestinataire);
+
 }
