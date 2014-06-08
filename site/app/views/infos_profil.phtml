@@ -11,13 +11,13 @@
 
     <div class="span2">
         <h2>Modifier mes informations personnelles</h2>
-        
+
         <form action="?action=infos_profil&function=update" method="post">
         	<label id="telephone">Telephone :</label><input type="text" name="telephone" id="telephone" value=<?php if (isset ($infos['infos_profil']['tel'])) echo ("0" . $infos['infos_profil']['tel']);?>>
         	<label id="adresse">Adresse : </label>
         	<select name="adresse">
         		<?php 
-        		echo("<option>".$infos['infos_profil']['nom']."</option>");
+        		echo("<option value='".$infos['infos_profil']['id']."'>".$infos['infos_profil']['nom']."</option>");
         			foreach ($infos['quartier'] as $i)
         					echo("<option>".$i['nom']."</option>");?>
         	</select>
