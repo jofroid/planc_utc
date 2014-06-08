@@ -21,6 +21,12 @@
         			foreach ($infos['quartier'] as $i)
         					echo("<option>".$i['nom']."</option>");?>
         	</select>
+        	<label class="control-label" for="focusedInput" id="orientation">Orientation : </label>
+        	<select class="form-control" id="select" name="orientation">
+        		<option value='H'>Homme</option>
+        		<option value='F'>Femme</option>
+        		<option value='D'>Les deux</option>
+        	</select>
         	<label class="control-label" for="focusedInput" id="semestre">Semestre d'etude actuel</label><input class="form-control" id="focusedInput" type="text" name="semestre" id="semestre" value=<?php if (isset ($infos['infos_profil']['semestre'])) echo ($infos['infos_profil']['semestre']);?>>
         	<INPUT TYPE="submit" VALUE="Valider" class="btn btn-default">
         </form>
