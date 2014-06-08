@@ -11,16 +11,28 @@ Class Wink {
 
 	public function sendWink($date,$loginExpediteur, $loginDestinataire)
 	{
-		if( ($loginExpediteur != $loginDestinataire) && !$this->winkExist($loginExpediteur, $loginDestinataire) )
+		if( ($loginExpediteur != $loginDestinataire) )
 		{	
-			$this->matchWink($loginExpediteur);
+			if(!$this->winkExist($loginExpediteur, $loginDestinataire))
+			{
+				$this->matchWink($loginExpediteur);
+
+				$req = $this->db->prepare('INSERT INTO wink 
+					(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
+					');
+				$req->execute(array($date,$loginExpediteur,$loginDestinataire));
+				return true;
+			}
+			else
+			{
+				$req = $this->db->prepare('DELETE FROM wink 
+					WHERE loginExpediteur = ?
+					AND loginDestinataire = ?
+					');
+				$req->execute(array($loginExpediteur,$loginDestinataire));
+				return true;
+			}
 			
-			die;
-			$req = $this->db->prepare('INSERT INTO wink 
-				(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
-				');
-			$req->execute(array($date,$loginExpediteur,$loginDestinataire));
-			return true;
 		}
 		else
 		{
