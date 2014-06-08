@@ -7,8 +7,13 @@
 	$permission = new Permission();
 	if($permission->isRegistered())
 	{
+		
 		$login_user = $permission->getLogin();
 		$wink = new Wink();
+		if (!$wink->matchWink($_GET['logindest']))
+			echo ("pas ok !");
+		else 
+			echo("ok");
 		echo $_GET['logindest'];
 		if($permission->loginExist($_GET['logindest']) == 1)
 		{

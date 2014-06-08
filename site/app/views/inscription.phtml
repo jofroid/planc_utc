@@ -11,33 +11,33 @@
 
     <div class="span2">
         <h2>Inscription</h2>
-        
+     <div class="form-group">   
         <form action="?action=inscription&function=insert" method="post" enctype="multipart/form-data">
-			<label id="age">Age: </label><input type="text" name="age" id="age">
-			<label id="sexe">Sexe: </label><select name="sexe">
+			<label class="control-label" for="focusedInput" id="age">Age: </label><input class="form-control" id="focusedInput" type="text" name="age" id="age">
+			<label class="control-label" for="focusedInput" id="sexe">Sexe: </label><select class="form-control" id="select"  name="sexe">
 				<option></option>
 				<option value = "F">Femme</option>
 				<option value = "H">Homme</option>
 			</select>
-        	<label id="telephone">Telephone: </label><input type="text" name="telephone" id="telephone">
-        	<label id="adresse">Quartier d'habitation: </label>
-        	<select name="adresse">
+        	<label class="control-label" for="focusedInput" id="telephone">Telephone: </label><input class="form-control" id="focusedInput" type="text" name="telephone" id="telephone">
+        	<label class="control-label" for="focusedInput" id="adresse">Quartier d'habitation: </label>
+        	<select  class="form-control" id="select" name="adresse">
         		<?php
         			foreach ($quartiers as $i)
 						echo("<option value=".$i['id'].">".$i['nom']."</option>");
 				?>
         	</select>
-			<label id="orientation">Interesse par: </label><select name="orientation">
+			<label class="control-label" for="focusedInput" id="orientation">Interesse par: </label><select class="form-control" id="select" name="orientation">
 				<option></option>
 				<option value = "F">Femmes</option>
 				<option value = "H">Hommes</option>
 				<option value = "B">Les deux</option>
 			</select>
-			<label id="semestre">Semestre d'etude actuel</label><input type="text" name="semestre" id="semestre">
-			<label id="avatar">Photo de profil: </label><input type="file" name="avatar">
-        	<INPUT TYPE="submit" VALUE="Valider">
+			<label class="control-label" for="focusedInput" id="semestre">Semestre d'etude actuel</label><input class="form-control" id="focusedInput" type="text" name="semestre" id="semestre">
+			<label class="control-label" for="focusedInput" id="avatar">Photo de profil: </label><input class="form-control" id="focusedInput" type="file" name="avatar">
+        	<INPUT type="submit" class="btn btn-primary" VALUE="Valider">
         </form>
         
     </div>
-   
+   </div>
 </div>
