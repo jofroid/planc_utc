@@ -1,0 +1,41 @@
+.tuile{
+  height: 330px;
+  width: 240px;
+  background-color: #ffffff;
+  margin: 1%;
+  padding: 4px;
+  margin-bottom: 0px;
+  display: inline-block;
+  border-radius: 15px;
+  border: 1px solid #e9e9e9;
+}
+.tuile-center{
+  text-align: center;
+}
+.tuile-wink {
+  z-index:10;
+  display: inline-block;
+  height: 87px;
+  width: 87px;
+  position: relative;
+  top: -340px;
+  left:90px;
+  background-image: url(wink-b.png);
+}
+.tuile-wink:hover {
+  background-image: url(wink-bhit.png);
+}
+.tuile-img {
+  height: 300px;
+  width: 230px;
+  display: inline;
+  border-radius: 10px;
+
+}
+.tuile-title {
+   text-align: center;
+   display: block;
+   margin-top: 3px;
+   color: #333333;
+   font-weight: bold !important;
+}
