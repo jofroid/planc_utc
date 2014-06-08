@@ -8,6 +8,11 @@ class Permission
 		$this->db = Atomik::get('db');
 	}
 
+	public function getLogin()
+	{
+		return $this->login;
+	}
+
 	public function isRegistered()
 	{
 		if(isset($this->login))
