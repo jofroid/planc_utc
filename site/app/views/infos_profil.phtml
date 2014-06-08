@@ -1,7 +1,7 @@
 <div class="hero-unit">
   <h1>Welcome to <strong>PLANC'UTC</strong></h1>
   <p>
-   Le site de rencontre pour UtcÃ©ens exigeants !
+   Le site de rencontre pour Utcéens exigeants !
     <a href="http://atomikframework.com/docs/get-started.html">Get Started</a> tutorial.
   </p>
   <p><a class="btn btn-large" href="http://atomikframework.com/docs">Read the documentation &raquo;</a></p>
@@ -21,6 +21,7 @@
         			foreach ($infos['quartier'] as $i)
         					echo("<option>".$i['nom']."</option>");?>
         	</select>
+        	<label class="control-label" for="focusedInput" id="semestre">Semestre d'etude actuel</label><input class="form-control" id="focusedInput" type="text" name="semestre" id="semestre" value=<?php if (isset ($infos['infos_profil']['semestre'])) echo ($infos['infos_profil']['semestre']);?>>
         	<INPUT TYPE="submit" VALUE="Valider" class="btn btn-default">
         </form>
         </div>

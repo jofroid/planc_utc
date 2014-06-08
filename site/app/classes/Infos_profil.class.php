@@ -15,17 +15,17 @@ class Infos_profil
 	}
 	
 	public function updateModifs() {
-		if (strlen($_POST['telephone']) == 10){
+		if (strlen($_POST['telephone']) == 10 && strlen($_POST['semestre']) < 10 && strlen($_POST['semestre']) >2){
 			$quartier = $this->db->selectOne("quartier", "nom = '". Atomik::escape($_POST['adresse'])."'");
-			
-			$data = array('tel' =>  Atomik::escape($_POST['telephone']), 'adresse' => $quartier['id']);
-			$this->db->update("infos_profil", $data);
+
+			$data = array('tel' =>  Atomik::escape(Atomik::escape($_POST['telephone'])), 'adresse' => Atomik::escape($quartier['id']), 'semestre' =>Atomik::escape($_POST['semestre']));
+		 	$this->db->update("infos_profil", $data);
 			return true;
 		}
 		else 
 		{
-			Atomik::flash("La taille de votre téléphone doit être de 10 caractères");
+			Atomik::flash("Les informations transmises ne sont pas correctes");
 			return false;
 		}
-	}	
+	}
 };
