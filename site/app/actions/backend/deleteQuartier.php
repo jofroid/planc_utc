@@ -7,6 +7,6 @@ if(!$_p->isAdmin())
 	Atomik::redirect('?forbidden=1&action=index');
 
 $this->db = Atomik::get('db');
-$_query= $this->db->prepare("DELETE FROM ETUDIANT WHERE login='".$this->escape($_POST['login'])."';");
+$_query= $this->db->prepare("DELETE FROM quartier WHERE id='".$this->escape($_POST['id'])."';");
 $_query->execute();
-Atomik::redirect('backend/showEtu');
+Atomik::redirect('backend/showQuartier');

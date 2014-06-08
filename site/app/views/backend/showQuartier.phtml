@@ -1,0 +1,11 @@
+<table>
+<tr><th>Login</th><th>Nom</th><th>Prénom</th></tr>
+<?php
+$i=0;
+foreach($logins as $login)
+{
+	echo"<tr><td>$login</td><td>$noms[$i]</td><td>$prenoms[$i]</td><td><form method='POST' action='?action=backend/deleteEtu.php'><input type='hidden' name='login' value='$login'><input type='submit' value='Supprimer'></form></td></tr>";
+	$i++;
+}
+?>
+</table>

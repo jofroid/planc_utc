@@ -31,3 +31,34 @@ Class Backend_profils
 		}
 	}
 };
+
+Class Backend_quartiers
+{
+
+	function __construct ()
+	{
+		$this->db = Atomik::get('db');
+	}
+
+
+	public function get_profile_correspond()
+	{
+		$stmt = $this->db->prepare('SELECT id, nom FROM quartier;');
+		$stmt->execute();
+		$i = 0;
+		while($donnees = $stmt->fetch())
+		{
+			$id[$i] = $donnees['id'];
+			$nom[$i] = $donnees['nom'];
+			$i++;
+		}
+		if($i > 0)
+		{
+			return array($login, $prenom,$nom);
+		}
+		else
+		{
+			return null;
+		}
+	}
+};
