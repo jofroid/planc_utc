@@ -47,7 +47,7 @@ class Inscription
 					return $nom;
 				}
 			}		
-	}
+	}*/
 	
 	public function insertInscription() {
 		$avatar_test = $this->check_upload_img();
@@ -60,6 +60,7 @@ class Inscription
 					);
 		$this->db->insert("image", $avatar);
 		$id_avatar = $this->db->selectOne("image", "source = '".$avatar_test."'");
+		$avatar_test = $this->check_upload_img();
 		$data 	= 	array(
 						'loginEtudiant' => Atomik::get('session.login'),
 						'age' => $_POST['age'], 
@@ -72,8 +73,4 @@ class Inscription
 					);
 		$this->db->insert("infos_profil", $data);	
 	}
-	
-	
-
-	
 };

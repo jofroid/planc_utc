@@ -32,5 +32,5 @@ function send_Wink(loginDestinataire)
 
 function update_picture_wink(loginDestinataire)
 {
-
+    alert(loginDestinataire);
 }
