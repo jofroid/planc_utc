@@ -13,7 +13,7 @@ class Inscription
 		return $res;
 	}
 	
-	/*public function check_upload_img()
+	public function check_upload_img()
 	{
 		$erreur = NULL;
 		$maxsize = 1024*50;
@@ -36,11 +36,6 @@ class Inscription
 			$image_sizes = getimagesize($_FILES['avatar']['tmp_name']);
 			$width = 350;
 			$height = 250;
-			if (1 == 2 $image_sizes[0] >= $width OR $image_sizes[1] >= $height) 
-			{
-				$erreur = "Taille d'image incorrecte";
-				return $erreur;
-			}
 
 			if($erreur == NULL)
 			{
@@ -49,14 +44,23 @@ class Inscription
 				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'],"assets/images/profile_picture/$nom");
 				if ($resultat)
 				{
-					return "good";
+					return $nom;
 				}
 			}		
-	}*/
+	}
 	
 	public function insertInscription() {
-		//$avatar_test = $this->check_upload_img();
-		//echo $avatar_test; die;
+		$avatar_test = $this->check_upload_img();
+		echo $avatar_test; 
+		$avatar	=	array(
+						'visible' => 1,
+						'source' => $avatar_test,
+						'dateUpload' => time(),
+						'loginEtudiant' => Atomik::get('session.login')
+					);
+		$this->db->insert("image", $avatar);
+		$id_avatar = $this->db->selectOne("image", "source = '".$avatar_test."'");
+		$avatar_test = $this->check_upload_img();
 		$data 	= 	array(
 						'loginEtudiant' => Atomik::get('session.login'),
 						'age' => $_POST['age'], 
@@ -65,7 +69,7 @@ class Inscription
 						'adresse' => $_POST['adresse'], 
 						'orientation' =>  $_POST['orientation'], 
 						'semestre' =>  $_POST['semestre'],
-						//'avatar' => NULL
+						'avatar' => $id_avatar['id']
 					);
 		$this->db->insert("infos_profil", $data);	
 	}
