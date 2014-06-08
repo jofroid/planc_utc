@@ -94,8 +94,27 @@ Class Store {
 		
 	}
 
+	public function get_winked($login_user)
+	{
+		$req="SELECT et.login, et.prenom, et.nom, inf.semestre, inf.age FROM (SELECT et.login, et.prenom, et.nom FROM etudiant et INNER JOIN wink w ON et.login=w.loginDestinataire WHERE loginExpediteur='$login_user') et LEFT JOIN infos_profil inf ON et.login=inf.loginEtudiant;";
+		$query=$this->db->prepare($req);
+		$req->execute();
+		$tab[0] = array('number' => 0);
+        $i = 0;
+		while($donnees = $req->fetch())
+		{
+			$tab[$i+1] = array('login' => $donnees['login'], 'prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'semestre' => $donnees['semestre'], 'age' => $donnees['age'], 'source' => $donnees['source']);
+            $i++;
+		}
+        $tab[0] = array('number' => $i);
 
-	
-	
-	
+		if($i > 0)
+		{
+			return $tab;
+		}
+		else
+		{
+			return null;
+		}
+	}
 };
