@@ -30,7 +30,7 @@ class Inscription
 			if ( !in_array($extension_upload,$extensions_valides) )
 			{
 				$erreur = "L'extension incorrecte";
-				return $erreur;
+				return $erreur; 
 			}
 
 			$image_sizes = getimagesize($_FILES['avatar']['tmp_name']);
