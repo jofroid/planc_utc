@@ -10,10 +10,7 @@
 		
 		$login_user = $permission->getLogin();
 		$wink = new Wink();
-		if (!$wink->matchWink($_GET['logindest']))
-			echo ("pas ok !");
-		else 
-			echo("ok");
+	
 		if($permission->loginExist($_GET['logindest']) == 1)
 		{
 			$wink->sendWink(date("Y:m:d"),$login_user,$_GET['logindest']);

@@ -1,8 +1,8 @@
-
+<?php if (isset ($compte)) {?>
 <h2>Bienvenue <?php echo Atomik::get('session.login');?></h2>
 
 <div class="row"> 
-<?php if (isset ($compte)) {?>
+
 	<ul class="list-group col-lg-7" >
 	  <li class="list-group-item"><span class="badge">Nom</span><?php echo $compte['etudiant']['nom'];?></li>
 	  <li class="list-group-item"><span class="badge">Prénom</span><?php echo $compte['etudiant']['prenom'];?></li>
@@ -17,9 +17,15 @@
 	      <INPUT TYPE="submit" VALUE="Modifier profil" class="btn btn-default">
 	</form>
 	</ul>
-	<?php }?>
+	
 
 	<div class="list-group col-lg-3">
 <?php  echo "<img src=\"assets/images/profile_picture/".$compte['image']['source']."\"/>"?>
  	</div>
+ 	
  </div>   
+ <?php }
+ 		else{ 
+ 			Atomik::flash("Vous devez vous d'abord connecter !");
+			Atomik::redirect("index");
+			}?>

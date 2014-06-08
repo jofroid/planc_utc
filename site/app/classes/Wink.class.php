@@ -15,7 +15,10 @@ Class Wink {
 		{	
 			if(!$this->winkExist($loginExpediteur, $loginDestinataire))
 			{
-				$this->matchWink($loginExpediteur);
+				if (!$this->matchWink($loginDestinataire))
+					echo ("pas ok !");
+				else
+					echo("ok");
 
 				$req = $this->db->prepare('INSERT INTO wink 
 					(date,loginExpediteur,loginDestinataire) VALUES(?,?,?)
