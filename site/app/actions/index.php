@@ -1,5 +1,6 @@
 <?php
 require '/config.php';
+require '/app/classes/permission.class.php';
 
 // your action code goes here
 if(isset($_GET['login']))	
