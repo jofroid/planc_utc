@@ -5,12 +5,12 @@
 <?php if (isset ($compte)) {?>
 	<ul class="list-group col-lg-7" >
 	  <li class="list-group-item"><span class="badge">Nom</span><?php echo $compte['etudiant']['nom'];?></li>
-	  <li class="list-group-item"><span class="badge">Prénom</span><?php echo $compte['etudiant']['prenom'];?></li>
+	  <li class="list-group-item"><span class="badge">PrÃ©nom</span><?php echo $compte['etudiant']['prenom'];?></li>
 	  <li class="list-group-item"><span class="badge">Age</span><?php echo $compte['infos_profil']['age'];?></li>
-	  <li class="list-group-item"><span class="badge">Sexe</span><?php echo $compte['infos_profil']['sexe'];?></li>
+	  <li class="list-group-item"><span class="badge">Sexe</span><?php switch($compte['infos_profil']['sexe']) { case 'H' : echo "Homme"; break; case 'F' : echo "Femme" ; break; } ;?></li>
 	  <li class="list-group-item"><span class="badge">Email</span><?php echo $compte['etudiant']['email'];?></li>
 	  <li class="list-group-item"><span class="badge">Semestre</span><?php echo $compte['infos_profil']['semestre'];?></li>
-	  <li class="list-group-item"><span class="badge">Orientation</span><?php echo $compte['infos_profil']['orientation'];?></li>
+	  <li class="list-group-item"><span class="badge">Orientation</span><?php switch($compte['infos_profil']['orientation']) { case 'H' : echo "Homme"; break; case 'F' : echo "Femme" ; break; case 'D' : echo "Homme & Femme" ; break; } ?></li>
 	  <li class="list-group-item"><span class="badge">Localisation</span><?php echo $compte['quartier']['nom'];?></li>
 	
 	<form action="?action=infos_profil" method="post" >

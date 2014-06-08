@@ -7,7 +7,7 @@ $infos = $i->getMesInfos();
 
 if (isset ($_GET['function']) && $_GET['function'] == 'update'){
 	if ($i->updateModifs()) {
-		Atomik::flash("Votre profil a correctement été modifié");
+		Atomik::flash("Votre profil a correctement Ã©tÃ© modifiÃ©");
 		Atomik::redirect("moncompte");
 	}
 }

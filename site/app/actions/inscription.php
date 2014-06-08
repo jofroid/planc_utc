@@ -10,7 +10,7 @@ if (isset ($_GET['function'])) {
 	switch ($_GET['function']){
 		case 'insert' : {
 			$i->insertInscription();
-			Atomik::flash("Votre profil a correctement été créé");
+			Atomik::flash("Votre profil a correctement Ã©tÃ© crÃ©Ã©");
 			Atomik::redirect("moncompte");
 			break;
 		}
