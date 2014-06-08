@@ -25,7 +25,7 @@ Class Store {
         $i = 0;
         while($donnees = $req->fetch())
         {
-            $tab[$i+1] = array('prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'age' => $donnees['age'], 'source' => $donnees['source']);
+            $tab[$i+1] = array('prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'semestre' => $donnees['semestre'], 'age' => $donnees['age'], 'source' => $donnees['source']);
             $i++;
         }
         $tab[0] = array('number' => $i);

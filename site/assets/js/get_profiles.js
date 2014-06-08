@@ -18,7 +18,6 @@ function get_profiles()
         {
             if (xhr_refresh.readyState == 4 && xhr_refresh.status == 200)
             {
-                 alert(xhr_refresh.responseText);
                  var profiles = JSON.parse(xhr_refresh.responseText);
 
                    if(profiles[0]["number"] > 0)
@@ -53,16 +52,18 @@ function display_profile(prenom, semestre, image_src)
 {
 	var element = document.createElement('div');
 	var prenom_element = document.createElement('div');
-    var semestre = document.createElement('div');
+    var semestre_element = document.createElement('div');
     var image =document.createElement('img');
 
     prenom_element.innerText = prenom;
-    semestre.innerText = semestre; 
-    //image.src= image_src;
+    semestre_element.innerText = semestre; 
+    image.src= CheminRepertoire + "/assets/images/profile_picture/" + image_src +'.jpg';
+    image.width = 300;
+    image.height = 200;
 
-    //element.appendChild(image);
+    element.appendChild(image);
     element.appendChild(prenom_element);
-    element.appendChild(semestre);
+    element.appendChild(semestre_element);
 	document.getElementById('main').appendChild(element);
 
 }
