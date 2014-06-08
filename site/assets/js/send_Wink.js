@@ -24,6 +24,11 @@ function send_Wink(loginDestinataire,tuile_wink)
         {
             if (xhr_send.readyState == 4 && xhr_send.status == 200)
             {
+                if(xhr_send.responseText == "ok")
+                {
+                        //document.getElementById('modal_match_body') = "Vous venez de matcher avec " + loginDestinataire + " ! Félicitations :)";
+                     $('#modal_match').modal('toggle');
+                }
                 update_picture_wink(loginDestinataire);
                 if(tuile_wink.className == "tuile-wink-red")
                 {
