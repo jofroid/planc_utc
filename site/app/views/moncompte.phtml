@@ -2,17 +2,18 @@
 <h2>Bienvenue <?php Atomik::get('session.login');?></h2>
 
 <?php if (isset ($compte)) {?>
-<label>Nom : </label><label><?php echo $compte['etudiant']['nom'];?></label>
-<label>Prenom :</label><label><?php echo $compte['etudiant']['prenom'];?></label>
-<label>Email : </label><label><?php echo $compte['etudiant']['email'];?></label>
-<label>Age : </label><label><?php echo $compte['infos_profil']['age'];?></label>
-<label>Sexe : </label><label><?php echo $compte['infos_profil']['sexe'];?></label>
-<label>Localisation :</label><label><?php echo $compte['quartier']['nom'];?></label>
-<label>Orientation :</label><label><?php echo $compte['infos_profil']['orientation'];?></label>
-<label>Semestre :</label><label><?php echo $compte['infos_profil']['semestre'];?></label>
-
-<form action="?action=infos_profil" method="post">
-      <INPUT TYPE="submit" VALUE="Modifier profil">
+<ul class="list-group">
+  <li class="list-group-item"><span class="badge">Nom</span><?php echo $compte['etudiant']['nom'];?></li>
+  <li class="list-group-item"><span class="badge">Prénom</span><?php echo $compte['etudiant']['prenom'];?></li>
+  <li class="list-group-item"><span class="badge">Age</span><?php echo $compte['infos_profil']['age'];?></li>
+  <li class="list-group-item"><span class="badge">Sexe</span><?php echo $compte['infos_profil']['sexe'];?></li>
+  <li class="list-group-item"><span class="badge">Email</span><?php echo $compte['etudiant']['email'];?></li>
+  <li class="list-group-item"><span class="badge">Semestre</span><?php echo $compte['infos_profil']['semestre'];?></li>
+  <li class="list-group-item"><span class="badge">Orientation</span><?php echo $compte['infos_profil']['orientation'];?></li>
+  <li class="list-group-item"><span class="badge">Localisation</span><?php echo $compte['quartier']['nom'];?></li>
+</ul>
+<form action="?action=infos_profil" method="post" >
+      <INPUT TYPE="submit" VALUE="Modifier profil" class="btn btn-default">
 </form>
 <?php }?>
  
