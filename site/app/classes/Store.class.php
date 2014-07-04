@@ -41,6 +41,59 @@ Class Store {
 		}
 	}
 
+	public function get_profile_by_location($login_user,$age,$orientation,$sexe_user,$x,$y)
+	{
+		if($orientation != "B")
+		{
+			$req = $this->db->prepare('SELECT * FROM etudiant 
+				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
+				LEFT JOIN image ON id = avatar
+				LEFT JOIN wink ON loginDestinataire = login
+				LEFT JOIN quartier ON quartier.id = adresse
+				WHERE sexe = ?
+				AND (orientation = ? OR orientation = "B")
+				AND login != ?
+				ORDER BY SQRT( POWER(x - ?,2) + POWER(y - ?,2) )
+				
+				');
+			$req->execute(array($orientation,$sexe_user,$login_user,$x,$y));
+		}
+		else
+		{
+			$req = $this->db->prepare('SELECT * FROM etudiant 
+				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
+				LEFT JOIN image ON id = avatar
+				LEFT JOIN wink ON loginDestinataire = login
+				LEFT JOIN quartier ON quartier.id = adresse
+				WHERE (orientation = ? OR orientation = "B")
+				AND login != ?
+				ORDER BY SQRT( POWER(x - ?,2) + POWER(y - ?,2) )
+				
+				');
+
+			$req->execute(array($sexe_user,$login_user,$x,$y));
+		}
+		
+
+		$tab[0] = array('number' => 0);
+        $i = 0;
+        while($donnees = $req->fetch())
+        {
+            $tab[$i+1] = array('login' => $donnees['login'], 'prenom' => $donnees['prenom'], 'nom' => $donnees['nom'], 'semestre' => $donnees['semestre'], 'age' => $donnees['age'], 'source' => $donnees['source'],'wink_login' => $donnees['loginDestinataire']);
+            $i++;
+        }
+        $tab[0] = array('number' => $i);
+        
+		if($i > 0)
+		{
+			return $tab;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 
 	public function get_profile_correspond($login_user,$age,$orientation,$sexe_user)
 	{
@@ -48,7 +101,6 @@ Class Store {
 		{
 			$req = $this->db->prepare('SELECT * FROM etudiant 
 				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
-				LEFT JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
 				LEFT JOIN image ON id = avatar
 				LEFT JOIN wink ON loginDestinataire = login
 				WHERE sexe = ?
@@ -63,7 +115,6 @@ Class Store {
 		{
 			$req = $this->db->prepare('SELECT * FROM etudiant 
 				INNER JOIN infos_profil ON infos_profil.loginEtudiant = login 
-				LEFT JOIN uv_etudiant ON uv_etudiant.loginEtudiant = login 
 				LEFT JOIN image ON id = avatar
 				LEFT JOIN wink ON loginDestinataire = login
 				WHERE (orientation = ? OR orientation = "B")

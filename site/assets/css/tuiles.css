@@ -1,0 +1,76 @@
+/* PASTILLE WINK */
+.tuile-wink {
+  z-index:10;
+  display: inline-block;
+  height: 47px;
+  width: 47px;
+  position: relative;
+  top: -250px;
+  left:100px;
+  background-image: url(./wink-b.png);
+}
+/* fin pastille */
+
+.tuile-center{
+  text-align: center;
+}
+
+/* tuile normale */
+.tuile{
+  height: 250px;
+  width: 230px;
+  background-color: #ffffff;
+  margin: 1%;
+  padding: 4px;
+  margin-bottom: 15px;
+  display: inline-block;
+  border-radius: 15px;
+  border: 1px solid #cbcbcb;
+}
+
+.tuile,.sw-tuile:hover{
+  cursor:  pointer;
+}
+.tuile-img {
+  height: 218px;
+  width: 218px;
+  display: inline;
+  border-radius: 12px;
+  border: 1px solid #cbcbcb;
+
+}
+.tuile-title {
+   text-align: center;
+   display: block;
+   margin-top: 3px;
+   color: #333333;
+   font-weight: bold !important;
+}
+
+/* tuile superwink */
+.sw-tuile{
+  height: 250px;
+  width: 230px;
+  background-color: #ee1236;
+  margin: 1%;
+  padding: 4px;
+  margin-bottom: 15px;
+  display: inline-block;
+  border-radius: 15px;
+  border: 1px solid #b90727;
+}
+
+.sw-tuile-img {
+  height: 218px;
+  width: 218px;
+  display: inline;
+  border-radius: 12px;
+  border: 1px solid #b90727;
+}
+.sw-tuile-title {
+   text-align: center;
+   display: block;
+   margin-top: 3px;
+   color: #ffffff;
+   font-weight: bold !important;
+}

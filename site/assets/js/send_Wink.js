@@ -15,7 +15,7 @@ jQuery(document).ready(function(){
 
  
 
-function send_Wink(loginDestinataire,tuile_wink)
+function send_Wink(loginDestinataire,tuile,image,prenom_element)
 {
 	var xhr_send = new XMLHttpRequest();
 
@@ -30,13 +30,17 @@ function send_Wink(loginDestinataire,tuile_wink)
                      $('#modal_match').modal('toggle');
                 }
                 update_picture_wink(loginDestinataire);
-                if(tuile_wink.className == "tuile-wink-red")
+                if(tuile.className == "tuile")
                 {
-                    tuile_wink.className = "tuile-wink";
+                    tuile.className = "sw-tuile";
+                    image.className = "sw-tuile-img";
+                    prenom_element.className = "sw-tuile-title";
                 }
                 else
                 {
-                    tuile_wink.className = "tuile-wink-red";
+                    tuile.className = "tuile";
+                    image.className = "tuile-img";
+                    prenom_element.className = "tuile-title";
                 }
                 
                 console.log(xhr_send.responseText);

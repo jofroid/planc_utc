@@ -11,7 +11,8 @@
 	{
 		$login_user = $permission->getLogin();
 		$store = new Store();
-		$result = $store->get_profile_correspond($login_user,17,$store->get_orientation($login_user),$store->get_sexe($login_user));
+		//$result = $store->get_profile_correspond($login_user,17,$store->get_orientation($login_user),$store->get_sexe($login_user));
+		$result = $store->get_profile_by_location($login_user,17,$store->get_orientation($login_user),$store->get_sexe($login_user),1,1);
 		echo(json_encode($result));
 	}
 	else

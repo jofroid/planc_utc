@@ -53,7 +53,7 @@ function display_profile(login,prenom, semestre, image_src, wink_login)
     var tuile = document.createElement('div');
 	var prenom_element = document.createElement('span');
     var image =document.createElement('img');
-    var tuile_wink = document.createElement('div');
+    //var tuile_wink = document.createElement('div');
 
     //element.className = "tuile-center";
     tuile.className = "tuile";
@@ -64,24 +64,28 @@ function display_profile(login,prenom, semestre, image_src, wink_login)
     prenom_element.innerText = prenom;
     if(wink_login == null)
     {
-        tuile_wink.className = "tuile-wink";
+
     }
     else
     {
-        tuile_wink.className = "tuile-wink-red";
+        tuile.className = "sw-tuile";
+        image.className = "sw-tuile-img";
+        prenom_element.className = "sw-tuile-title";
     }
+
+
    
     image.src= CheminRepertoire + "/assets/images/profile_picture/" + image_src +'.jpg';
 
     //element.appendChild(tuile);
     tuile.appendChild(image);
     tuile.appendChild(prenom_element);
-    tuile.appendChild(tuile_wink);
+   // tuile.appendChild(tuile_wink);
 
 
 	document.getElementById('main').appendChild(tuile);
-     tuile_wink.addEventListener('click', function(){
-                          send_Wink(login,tuile_wink );
+     tuile.addEventListener('click', function(){
+                          send_Wink(login,tuile, image,prenom_element);
         
                           
                          });
