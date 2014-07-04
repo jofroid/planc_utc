@@ -1,0 +1,1 @@
+ALTER TABLE  `etudiant` ADD  `id_persistant` VARCHAR( 255 ) NOT NULL ;

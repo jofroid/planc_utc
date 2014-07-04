@@ -12,7 +12,8 @@ Atomik::set(array(
             'catch_errors' => true
         ),
         'Session',
-        'Flash'
+        'Flash',
+        'Controller'
     ),
 
     'app.layout' => '_layout',
@@ -21,9 +22,28 @@ Atomik::set(array(
     'atomik.debug' => true
     
 ));
-
+// Connexion à la base de données
 Atomik::set('plugins.Db', array(
     'dsn' => 'mysql:host=localhost;dbname=plancutc',
     'username' => 'root',
     'password' => ''
 ));
+
+
+Atomik::set(array(
+        // Activation de l'URL Rewriting
+        'atomik.url_rewriting' => true,
+        // Adresse de base de Wink
+        'atomik.base_url' => 'http://127.0.0.1/planc_utc/site/'
+        ));
+
+// Système d'authentication
+Atomik::set(array(
+        // URL vers le CAS
+        'cas_url' => 'https://cas.utc.fr/cas/',
+        // Temps limite d'attente
+        'cas_timeout' => '10',
+        // URL vers le serveur Ginger
+        'ginger_server' =>  'http://127.0.0.1/faux-ginger/index.php/v1/',
+        // Clé d'accès de l'application Wink à Ginger
+        'ginger_apikey' => 'fauxginger' ));
