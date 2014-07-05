@@ -213,7 +213,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-site/config.php
+site/app/config.php
 
 
 site/assets/edt/*
