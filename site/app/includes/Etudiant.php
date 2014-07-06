@@ -7,12 +7,12 @@ class Etudiant
 	const TABLE_SESSION = "etudiant_sessions";
 	const DUREE_SESSION = 604800; // 3600*24*7 (1 semaine de durée)
 
-	private $login = "";
-	private $nom = "";
-	private $prenom = "";
-	private $is_admin = false;
-	private $is_adult = false;
-	private $email = "";
+	public $login = "";
+	public $nom = "";
+	public $prenom = "";
+	public $is_admin = false;
+	public $is_adult = false;
+	public $email = "";
 
 	// ID persistant lié au login
 	public $id_persistant = "";
