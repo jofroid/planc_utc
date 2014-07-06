@@ -5,7 +5,7 @@ class AccueilController extends BaseController
 	{
 		if (!$this->_isLogged())
 		{
-			Atomik::redirect('auth/login');
+			$this->_redirect('auth/login');
 		}
 	}
 

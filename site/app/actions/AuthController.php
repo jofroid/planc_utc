@@ -12,8 +12,8 @@ class AuthController extends BaseController
     
     public function __construct()
     {
-        $this->url = Atomik::get("cas_url");
-        $this->timeout = Atomik::get("cas_timeout");
+        $this->url = $this->_get("cas_url", "https://cas.utc.fr/cas/");
+        $this->timeout = $this->_get("cas_timeout", 10);
     }
 
     public function login($ticket = null)
@@ -21,29 +21,29 @@ class AuthController extends BaseController
         // Si l'utilisateur est connecté, on le redirige, (rien à faire ici)
         if ($this->_isLogged())
         {
-            Atomik::redirect("accueil/index");
+            $this->_redirect("accueil/index");
         }
         // Connexion par le CAS
         if ($ticket == null)
         {
             $url = $this->url . "login?service=" . Atomik::url();
-            Atomik::redirect($url);
+            $this->_redirect($url);
         }
         else
         {
-            if ($login = $this->authenticate($ticket, Atomik::url()))
+            if ($login = $this->_authenticate($ticket, Atomik::url()))
             {
                     $this->etudiant = Etudiant::avecLogin($login);
                     $cookie = $this->etudiant->genIdTemporaire();
                     setcookie("id_temporaire", $cookie['id_temporaire'], $cookie['date_expiration'], '/');
                     setcookie("id_persistant", $this->etudiant->id_persistant, $cookie['date_expiration'], '/');
-                    Atomik::redirect("accueil");
+                    $this->_redirect("accueil");
             }
         }
     }
-    public function authenticate($ticket, $service)
+    public function _authenticate($ticket, $service)
     {
-        $r = Request::get($this->getValidateUrl($ticket, $service))
+        $r = Request::get($this->_getValidateUrl($ticket, $service))
           ->sendsXml()
           ->timeoutIn($this->timeout)
           ->send();
@@ -77,7 +77,7 @@ class AuthController extends BaseController
         // never reach there
     }
     
-    public function getValidateUrl($ticket, $service)
+    public function _getValidateUrl($ticket, $service)
     {
         return $this->url."serviceValidate?ticket=".urlencode($ticket)."&service=".urlencode($service);
     }
