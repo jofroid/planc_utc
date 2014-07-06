@@ -58,6 +58,16 @@
   display: inline-block;
   border-radius: 15px;
   border: 1px solid #b90727;
+    -webkit-animation: colorswitch 500ms ease;
+        -moz-animation: colorswitch 500ms ease;
+         -ms-animation: colorswitch 500ms ease;
+          -o-animation: colorswitch 500ms ease;
+             animation: colorswitch 500ms ease;
+}
+
+@-webkit-keyframes colorswitch{
+     from { background-color: #ffffff; }
+     to   {  background-color: #ee1236; }
 }
 
 .sw-tuile-img {
