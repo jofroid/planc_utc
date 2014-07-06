@@ -11,9 +11,8 @@ jQuery(document).ready(function(){
 
 function get_profiles()
 {
-	var xhr_refresh = new XMLHttpRequest();
-    xhr_refresh.withCredentials = true;
-    
+        var xhr_refresh = new XMLHttpRequest();
+        xhr_refresh.withCredentials = true;
         xhr_refresh.open('GET', CheminRepertoire + '/ajax/profiles');
         xhr_refresh.onreadystatechange = function()
         {
@@ -34,9 +33,8 @@ function get_profiles()
                      alert('Une erreur est survenue !\n\nCode :' + xhr_refresh.status + '\nTexte : ' + xhr_refresh.statusText);
              }
         };
-    xhr_refresh.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhr_refresh.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr_refresh.send(null);
- 
 }
 
 

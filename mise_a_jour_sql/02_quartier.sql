@@ -1,0 +1,2 @@
+ALTER TABLE  `quartier` ADD  `x` FLOAT NOT NULL ,
+ADD  `y` FLOAT NOT NULL ;
