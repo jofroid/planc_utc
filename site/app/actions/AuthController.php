@@ -21,7 +21,7 @@ class AuthController extends BaseController
         // Si l'utilisateur est connecté, on le redirige, (rien à faire ici)
         if ($this->_isLogged())
         {
-            $this->_redirect("accueil/index");
+            $this->_redirect("index");
         }
         // Connexion par le CAS
         if ($ticket == null)
@@ -37,7 +37,7 @@ class AuthController extends BaseController
                     $cookie = $this->etudiant->genIdTemporaire();
                     setcookie("id_temporaire", $cookie['id_temporaire'], $cookie['date_expiration'], '/');
                     setcookie("id_persistant", $this->etudiant->id_persistant, $cookie['date_expiration'], '/');
-                    $this->_redirect("accueil");
+                    $this->_redirect("index");
             }
         }
     }
