@@ -100,6 +100,13 @@ class Etudiant
 		return $etudiant;
 	}
 
+	public static function loginExist($login)
+	{
+		$db = Atomik::get("db");
+		$nb = $db->count(self::TABLE,array('login' => $login));
+		return (bool)$nb;
+	}
+
 	public function genIdTemporaire()
 	{
 		$db = Atomik::get("db");

@@ -18,8 +18,8 @@ jQuery(document).ready(function(){
 function send_Wink(loginDestinataire,tuile,image,prenom_element)
 {
 	var xhr_send = new XMLHttpRequest();
-
-        xhr_send.open('GET', CheminRepertoire + '/?action=sendWink&logindest=' + loginDestinataire );
+        xhr_send.withCredentials = true;
+        xhr_send.open('GET', CheminRepertoire + '/ajax/sendwink?logindest=' + loginDestinataire );
         xhr_send.onreadystatechange = function()
         {
             if (xhr_send.readyState == 4 && xhr_send.status == 200)
@@ -51,7 +51,7 @@ function send_Wink(loginDestinataire,tuile,image,prenom_element)
                      alert('Une erreur est survenue !\n\nCode :' + xhr_send.status + '\nTexte : ' + xhr_send.statusText);
              }
         };
- 
+        xhr_send.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr_send.send(null);
 }
 
