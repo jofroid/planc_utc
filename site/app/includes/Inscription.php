@@ -1,4 +1,5 @@
 <?php
+require_once 'app/classes/permission.class.php';
 
 class Inscription
 {

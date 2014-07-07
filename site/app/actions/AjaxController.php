@@ -23,7 +23,7 @@ class AjaxController extends BaseController
 		}
 		else
 		{
-		
+			$this->_trigger404("Ce login n'existe pas.");
 		}
 	}
 

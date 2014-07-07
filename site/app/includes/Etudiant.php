@@ -13,6 +13,7 @@ class Etudiant
 	public $is_admin = false;
 	public $is_adult = false;
 	public $email = "";
+	public $nouveau = false;
 
 	// ID persistant lié au login
 	public $id_persistant = "";
@@ -47,6 +48,9 @@ class Etudiant
 			// On lui crée son identifiant ID persistant lié à son login
 			$etudiant->id_persistant = md5(uniqid('', true));
 
+			// on indique que l'étudiant vient d'être créé
+			$etudiant->nouveau = true;
+			
 			// On l'insère (enfin) dans la base de données
 			$etudiant->create();
 		}
