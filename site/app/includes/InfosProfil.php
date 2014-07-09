@@ -1,13 +1,12 @@
 <?php
 require_once 'app/classes/permission.class.php';
 
-class Inscription
+class InfosProfil
 {
 	function __construct (){
 		$this->db = Atomik::get('db');
 	}
 
-	/* Renvoi les informations de la table etudiant*/
 	public function getQuartiers(){
 		$res =  $this->db->select("quartier");
 		return $res;
@@ -48,30 +47,19 @@ class Inscription
 				}
 			}		
 	}
-	
-	public function insertInscription() {
-		$avatar_test = $this->check_upload_img();
-		echo $avatar_test; 
-		$avatar	=	array(
-						'visible' => 1,
-						'source' => $avatar_test,
-						'dateUpload' =>  date("Y-m-d"),
-						'loginEtudiant' => Atomik::get('session.login')
-					);
-		
-		$this->db->insert("image", $avatar);
-		$id_avatar = $this->db->selectOne("image", "source = '".$avatar_test."'");
-		$avatar_test = $this->check_upload_img();
-		$data 	= 	array(
-						'loginEtudiant' => Atomik::get('session.login'),
-						'age' => $_POST['age'], 
-						'sexe' => $_POST['sexe'], 
-						'tel' =>  $_POST['telephone'], 
-						'adresse' => $_POST['adresse'], 
-						'orientation' =>  $_POST['orientation'], 
-						'semestre' =>  $_POST['semestre'],
-						'avatar' => $id_avatar['id']
-					);
-		$this->db->insert("infos_profil", $data);	
+
+	public function insertSexe($login,$sexe,$orientation)
+	{
+		$this->db->insert("infos_profil",array("sexe" => $sexe, "orientation" => $orientation));
+	}
+
+	public function updateTel($login,$tel)
+	{
+		$this->db->update("infos_profil",array("tel" => $tel), array("login" => $login));
+	}
+
+	public function updateAdresse($login,$adresse)
+	{
+		$tis->db->update("infos_profil",array("adresse" => $adresse),array("login" => $login));
 	}
 };

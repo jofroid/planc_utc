@@ -1,0 +1,38 @@
+  <div class="row">
+    <div class="col-md-8">
+	<form class="form-horizontal" enctype="multipart/form-data" action="" method="post">
+		<h1>Bienvenue sur Wink</h1>
+    <fieldset>
+
+     <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">A Compiègne, tu habites </label>
+            <div class="col-sm-8">
+               <select class="form-control" id="select">
+                        <?php
+              foreach ($quartiers as $i)
+            echo("<option value=".$i['id'].">".$i['nom']."</option>");
+                    ?>
+                      </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Ta photo de profil </label>
+            <div class="col-sm-8">
+              <input type="file" name="image" size="30"  class="form-control"/>
+            </div>
+          </div>
+                
+
+                  <div class="form-group">
+                  	<div class="pull-right">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Suivant</button>
+                    </div>
+                </div>
+                  </div>
+
+              </form>
+</div>
+</div>
